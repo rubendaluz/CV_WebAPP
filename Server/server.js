@@ -1,48 +1,47 @@
+// Importar node packages
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import "dotenv/config";
-import fs from "fs";
+
+// SERVER ROUTES
+import { api } from "./routes/index.js";
+import { database } from "./config/context/database.js";
+
 //--REST SERVER--//
-const app = express();
+const server = express();
 
 // client can be postman | react website | react localhost link | etc
-const clientURL = "http://localhost:5500";
+const clientURL = "*";
 
 // CORS options
 const corsOptions = {
   origin: clientURL,
 };
-app.use(cors(corsOptions));
+server.use(cors(corsOptions));
 
 // output dados de pedido HTTP - logger
-app.use(morgan("short"));
+server.use(morgan("short"));
 
 // parse dados dos pedidos no content-type - application/json
-app.use(express.json());
+server.use(express.json());
 
-//TODO: ROUTES VÃO SER COLOCADOS AQUI!
+// http://localhost:4242/api ......
+server.use("/api", api);
+
+//Fazer ligação à Base de Dados
+// npm install --save mysql2
+try {
+  database.sync({ force: false, alter: true });
+} catch (error) {
+  console.info(error);
+}
 
 // correr server no url host:port definido em .env
-app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
+server.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
   console.log(
     "Server up and running at http://%s:%s",
     process.env.SERVER_HOST,
     process.env.SERVER_PORT
   );
 });
-
-//TODO: ROUTES VÃO SER COLOCADOS AQUI!
-//--ROUTES--//
-const router = Router();
-
-const datajson = fs.readFileSync("data.json", "utf-8"); // Read string-json from file
-const data = JSON.parse(datajson); // Parse to JSON
-
-// GET all data method route
-router.get("/", (req, res) => {
-  console.log(data.nome);
-  res.send(data);
-});
-
-app.use(router);
