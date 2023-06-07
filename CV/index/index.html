@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <title>My CV</title>
   </head>
   <body>
@@ -58,18 +62,28 @@
       </div>
       <div class="skills">
         <div class="programing_langs">
-          <p class="title">Linguagens de Progamação</p>
+          <div class="top">
+            <p class="title">Linguagens de Programação</p>
+            <i id="add_lang" class="fas fa-plus"></i>
+          </div>
           <div class="langs_container">
             <div class="lang" id="lang1">
               <p class="lang_name">Java</p>
               <div class="skill_bar">
                 <div id="lang1_amount"></div>
               </div>
+              <div class="edit_remove">
+                <i class="fas fa-edit"></i>
+                <i onclick="deletePost(this)" class="fas fa-trash-alt"></i>
+              </div>
             </div>
           </div>
         </div>
         <div class="hard_skills">
-          <p class="title">Hard Skills</p>
+          <div class="top">
+            <p class="title">Hard Skills</p>
+            <i id="add_hard_skill" class="fas fa-plus"></i>
+          </div>
         </div>
       </div>
       <div class="skills" id="skills2">
@@ -78,7 +92,10 @@
         </div>
         <div class="softSkills_pContacts">
           <div class="soft_skills">
-            <p class="title">Soft Skills</p>
+            <div class="top">
+              <p class="title">Soft Skills</p>
+              <i id="add_soft_skill" class="fas fa-plus"></i>
+            </div>
           </div>
           <div class="personal_contacts">
             <p class="title">personal_contacts</p>
