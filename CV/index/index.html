@@ -9,7 +9,10 @@
   </head>
   <body>
     <header>
-      <div><h1>My CV</h1></div>
+      <div class="cv_title_icon">
+        <img id="cv_icon" src="img/cv_icon.png" alt="" />
+        <h1>My CV</h1>
+      </div>
       <div class="menu">
         <ul id="menu">
           <li><a id="login_button">Login</a></li>
@@ -56,6 +59,14 @@
       <div class="skills">
         <div class="programing_langs">
           <p class="title">Linguagens de Progamação</p>
+          <div class="langs_container">
+            <div class="lang" id="lang1">
+              <p class="lang_name">Java</p>
+              <div class="skill_bar">
+                <div id="lang1_amount"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="hard_skills">
           <p class="title">Hard Skills</p>
@@ -75,5 +86,8 @@
         </div>
       </div>
     </div>
+    <footer>
+      <p>Alguma coisa</p>
+    </footer>
   </body>
 </html>
