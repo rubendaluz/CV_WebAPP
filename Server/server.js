@@ -5,7 +5,7 @@ import morgan from "morgan";
 import "dotenv/config";
 
 // SERVER ROUTES
-import { api } from "./routes/index.js";
+// import { api } from "./routes/index.js";
 import { database } from "./config/context/database.js";
 
 //--REST SERVER--//
@@ -27,7 +27,7 @@ server.use(morgan("short"));
 server.use(express.json());
 
 // http://localhost:4242/api ......
-server.use("/api", api);
+// server.use("/api", api);
 
 //Fazer ligação à Base de Dados
 // npm install --save mysql2

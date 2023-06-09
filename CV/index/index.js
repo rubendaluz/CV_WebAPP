@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const langsConteiner = document.querySelector(".langs_container");
   const langsForm = document.querySelector(".form_add_lang");
   const btnCloseLangsForm = document.querySelector("#close_langs_form");
-  let id = 1;
+  let id_langs = 1;
   const max_langs = 6;
 
   // Variaveis correspondentes a secção de Hard skills
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   let id_hard_skill = 1;
   const max_hard_skilss = 6;
+
   // Funções correspondentes a secção de Linguagens de programação
   let insertLang = (nome, exp, id) => {
     langsConteiner.innerHTML += `<div class="lang" id="lang${id}">
@@ -47,25 +48,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnAddLang.addEventListener("click", (e) => {
     openLangsForm();
-    langsForm.addEventListener("submit", (e) => {
-      e.preventDefault(); // Impede o envio do formulário por padrão
-      // Obter os valores dos campos
-      var lang_name = document.querySelector("#lang_name").value;
-      var lang_xp = document.querySelector("#lang_xp").value;
-
-      if (id <= max_langs) {
-        console.log("working...");
-        insertLang(lang_name, lang_xp, id);
-        id++;
-      }
-      // // Limpar os campos do formulário (opcional)
-      document.querySelector("#lang_name").value = "";
-      document.querySelector("#lang_xp").value = "";
-      //fecha a janela do formulario
-      closeLangsForm();
-    });
   });
+  langsForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Impede o envio do formulário por padrão
+    // Obter os valores dos campos
+    let lang_name = document.querySelector("#lang_name").value;
+    let lang_xp = document.querySelector("#lang_xp").value;
 
+    if (id_langs <= max_langs) {
+      console.log("working...");
+      insertLang(lang_name, lang_xp, id_langs);
+      id_langs++;
+    }
+    // // Limpar os campos do formulário
+    document.querySelector("#lang_name").value = "";
+    document.querySelector("#lang_xp").value = "";
+    //fecha a janela do formulario
+    closeLangsForm();
+  });
   // Funções correspondentes a secção de Hard Skills
   // let insertHardSkill = (nome, exp, id) => {
   //   langsConteiner.innerHTML += `<div class="lang" id="lang${id}">
