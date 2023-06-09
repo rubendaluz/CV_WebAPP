@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -60,32 +61,56 @@
       <div class="work_experience">
         <p class="title">Experiência</p>
       </div>
+
       <div class="skills">
         <div class="programing_langs">
           <div class="top">
             <p class="title">Linguagens de Programação</p>
-            <i id="add_lang" class="fas fa-plus"></i>
+            <i id="addLang" class="fas fa-plus"></i>
           </div>
           <div class="langs_container">
-            <div class="lang" id="lang1">
-              <p class="lang_name">Java</p>
-              <div class="skill_bar">
-                <div id="lang1_amount"></div>
-              </div>
-              <div class="edit_remove">
-                <i class="fas fa-edit"></i>
-                <i onclick="deletePost(this)" class="fas fa-trash-alt"></i>
-              </div>
+            <!-- Aqui vão as linguagens de programação a serem adicionadas-->
+          </div>
+
+          <div class="forms form_add_lang">
+            <i id="close_langs_form" class="fas fa-times close_forms"></i>
+            <div>
+              <h3>Adicione uma Linguagem de Programação</h3>
             </div>
+            <form>
+              <input
+                id="lang_name"
+                type="text"
+                placeholder="Nome da Linguagem"
+              />
+              <input id="lang_xp" type="text" placeholder="0-100" />
+              <button type="submit">Enviar</button>
+            </form>
           </div>
         </div>
+
         <div class="hard_skills">
           <div class="top">
             <p class="title">Hard Skills</p>
             <i id="add_hard_skill" class="fas fa-plus"></i>
           </div>
+          <div class="forms form_hard_skills">
+            <i id="close_hard_skills_form" class="fas fa-times close_forms"></i>
+            <div>
+              <h3>Adicione uma Hard Skill</h3>
+            </div>
+            <form>
+              <input
+                id="hard_skill_name"
+                type="text"
+                placeholder="Nome da Hard Skill"
+              />
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
         </div>
       </div>
+
       <div class="skills" id="skills2">
         <div class="education">
           <p class="title">Educação</p>
