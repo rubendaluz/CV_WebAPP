@@ -49,28 +49,20 @@ document.addEventListener("DOMContentLoaded", () => {
     openLangsForm();
     langsForm.addEventListener("submit", (e) => {
       e.preventDefault(); // Impede o envio do formulário por padrão
-
       // Obter os valores dos campos
-      let lang_name = document.querySelector("#lang_name").value;
-      let lang_xp = document.querySelector("#lang_xp").value;
-
-      // Armazenar os dados ou fazer algo com eles
-      console.log("Nome:", lang_name);
-      console.log("xp:", lang_xp);
+      var lang_name = document.querySelector("#lang_name").value;
+      var lang_xp = document.querySelector("#lang_xp").value;
 
       if (id <= max_langs) {
         console.log("working...");
         insertLang(lang_name, lang_xp, id);
         id++;
-        console.log("Linguagem inserida com sucesso");
       }
-
+      // // Limpar os campos do formulário (opcional)
+      document.querySelector("#lang_name").value = "";
+      document.querySelector("#lang_xp").value = "";
       //fecha a janela do formulario
       closeLangsForm();
-
-      // // Limpar os campos do formulário (opcional)
-      // document.querySelector("#lang_name").value = "";
-      // document.querySelector("#lang_xp").value = "";
     });
   });
 
@@ -111,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Obter os valores dos campos
       let skill_name = document.querySelector("#hard_skill_name").value;
 
-      if (id_hard_skill <= max_hard_skills) {
+      if (id_hard_skill <= max_hard_skilss) {
         // console.log("working...");
         // insertLang(lang_name, lang_xp, id);
         // id++;
