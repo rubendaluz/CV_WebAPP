@@ -25,19 +25,165 @@
         </ul>
       </div>
     </header>
+    <div class="header">
+      <div class="profile_pic_section">
+        <div class="profile_pic"></div>
+      </div>
+      <div class="name">
+        <h3 id="name">Ruben da Luz</h3>
+        <p id="profissao">Engenheiro Redes e sistemas de Computadores</p>
+      </div>
+    </div>
     <div class="page_content">
-      <div class="profile">
-        <div class="profile_pic_section">
-          <div class="profile_pic"></div>
-          <div class="name">
-            <h3 id="name">Ruben da Luz</h3>
-            <p id="profissao">Engenheiro Redes</p>
+      <aside>
+        <div class="personal_contacts">
+          <div class="top">
+            <p class="title">CONTACTOS</p>
+            <i id="add_contact" class="fas fa-plus"></i>
+          </div>
+          <div class="conteiner_contacts">
+            <!-- email -->
+            <!-- <i class="fas fa-envelope-open"></i> -->
+            <!-- phone -->
+            <!-- <i class="fas fa-phone-alt"></i> -->
+            <!-- Whats -->
+            <!-- <i class="fab fa-whatsapp"></i> -->
+          </div>
+          <div class="forms form_add_contact">
+            <i id="close_contacts_form" class="fas fa-times close_forms"></i>
+            <div>
+              <h3>Adicione um novo contacto</h3>
+            </div>
+            <form action="">
+              <fieldset id="contact_type_selection">
+                <legend>Please select your preferred contact method:</legend>
+                <div>
+                  <input
+                    type="radio"
+                    id="selectContactEmail"
+                    name="contact"
+                    value="email"
+                    checked
+                  />
+                  <label for="contactEmail">Email</label>
+
+                  <input
+                    type="radio"
+                    id="selectContactPhone"
+                    name="contact"
+                    value="phone"
+                  />
+                  <label for="contactPhone">Phone</label>
+
+                  <input
+                    type="radio"
+                    id="selectContactWhats"
+                    name="contact"
+                    value="number"
+                  />
+                  <label for="contactWhats">Whatsapp</label>
+
+                  <div class="insert_email">
+                    <label for="email">Insira o email: </label>
+                    <input type="email" name="email" id="email" />
+                  </div>
+                  <div class="insert_number">
+                    <label for="phoneNumber">Insira o número: </label>
+                    <input type="number" name="phoneNumber" id="phone" />
+                  </div>
+                  <div class="insert_whats">
+                    <label for="whatsapp">Insira o Whatsapp: </label>
+                    <input type="number" name="whatsapp" id="whatsapp" />
+                  </div>
+                </div>
+                <button type="submit">Submit</button>
+              </fieldset>
+            </form>
           </div>
         </div>
+        <div class="skills">
+          <div class="programing_langs">
+            <div class="top">
+              <p class="title">LINGUAGENS DE PROGRAMAMAÇÃO</p>
+              <i id="addLang" class="fas fa-plus"></i>
+            </div>
+            <div class="langs_container">
+              <!-- Aqui vão as linguagens de programação a serem adicionadas-->
+            </div>
+
+            <div class="forms form_add_lang">
+              <i id="close_langs_form" class="fas fa-times close_forms"></i>
+              <div>
+                <h3>Adicione uma Linguagem de Programação</h3>
+              </div>
+              <form>
+                <input
+                  id="lang_name"
+                  type="text"
+                  placeholder="Nome da Linguagem"
+                  required
+                />
+                <input id="lang_xp" type="text" placeholder="0-100" required />
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="hard_skills">
+            <div class="top">
+              <p class="title">HARD SKILLS</p>
+              <i id="add_hard_skill" class="fas fa-plus"></i>
+            </div>
+            <ul class="hard_skills_conteiner">
+              <!-- Aqui vão as hard skills -->
+            </ul>
+            <div class="forms form_hard_skills">
+              <i
+                id="close_hard_skills_form"
+                class="fas fa-times close_forms"
+              ></i>
+              <div>
+                <h3>Adicione uma Hard Skill</h3>
+              </div>
+              <form>
+                <input
+                  id="hard_skill_name"
+                  type="text"
+                  placeholder="Nome da Hard Skill"
+                />
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="socials">
+            <div class="top">
+              <p class="title">SOCIAL</p>
+              <i id="addSocial" class="fas fa-plus"></i>
+            </div>
+            <!-- Telegram -->
+            <i class="fas fa-paper-plane"></i>
+            <!-- Youtube -->
+            <i class="fab fa-youtube"></i>
+            <!-- linkedin -->
+            <i class="fab fa-linkedin"></i>
+            <!-- Github -->
+            <i class="fab fa-github"></i>
+            <!-- Facebook -->
+            <i class="fab fa-facebook-square"></i>
+          </div>
+        </div>
+      </aside>
+      <main>
         <div class="personal_info">
-          <div class="professional_contacts"></div>
           <div class="description">
-            <p class="title">Sobre mim</p>
+            <div class="top">
+              <p class="title">PERFIL</p>
+              <div class="edit_remove">
+                <i class="fas fa-edit"></i>
+              </div>
+            </div>
+
             <div class="info">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -45,92 +191,66 @@
                 cupiditate vero eius quidem facilis voluptates vitae. Quia
                 laboriosam sapiente sequi quae molestias. Beatae inventore
                 necessitatibus quidem laboriosam assumenda dolor dicta quasi
-                possimus ipsa quae tenetur maxime consequatur soluta
-                exercitationem cumque officiis dolores iure, facilis nesciunt
-                fuga itaque eos minima? Recusandae non aut illum id accusantium
-                iure amet aliquid autem? Nisi qui consectetur cupiditate
-                inventore culpa! Impedit doloremque id possimus voluptatibus
-                suscipit numquam hic at enim nesciunt adipisci accusamus,
-                laboriosam, doloribus consectetur. Aliquid eos eum labore rerum,
-                culpa quidem harum non.
+                possimus ipsa quae tenetur maxime consequatur soluta.
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="work_experience">
-        <p class="title">Experiência</p>
-      </div>
-
-      <div class="skills">
-        <div class="programing_langs">
+        <div class="work_experience">
           <div class="top">
-            <p class="title">Linguagens de Programação</p>
-            <i id="addLang" class="fas fa-plus"></i>
+            <p class="title">EXPERIÊNCIA PROFISSIONAL</p>
+            <i id="add_work_xp" class="fas fa-plus"></i>
           </div>
-          <div class="langs_container">
-            <!-- Aqui vão as linguagens de programação a serem adicionadas-->
-          </div>
+          <div class="prof_xp_conteiner">
+            <div class="forms form_add_work_xp">
+              <i id="close_work_xp_form" class="fas fa-times close_forms"></i>
+              <div>
+                <h3>Adicione uma Experiencia Profissional</h3>
+              </div>
+              <form>
+                <input
+                  id="company_name"
+                  type="text"
+                  placeholder="Nome da Empresa"
+                  required
+                />
+                <div>
+                  <label for="entrance_date">Ano de entrada</label>
+                  <input type="year" name="entrance_date" id="entrance_date" />
+                </div>
 
-          <div class="forms form_add_lang">
-            <i id="close_langs_form" class="fas fa-times close_forms"></i>
-            <div>
-              <h3>Adicione uma Linguagem de Programação</h3>
+                <div>
+                  <label for="exit_date">Ano de saída</label>
+                  <input type="year" name="exit_date" id="exit_date" />
+                </div>
+
+                <input
+                  id="job_name"
+                  type="text"
+                  placeholder="Nome do Cargo"
+                  required
+                />
+                <input
+                  id="job_description"
+                  type="text"
+                  placeholder="Descrição do Cargo"
+                  required
+                />
+                <button type="submit">Enviar</button>
+              </form>
             </div>
-            <form>
-              <input
-                id="lang_name"
-                type="text"
-                placeholder="Nome da Linguagem"
-                required
-              />
-              <input id="lang_xp" type="text" placeholder="0-100" required />
-              <button type="submit">Enviar</button>
-            </form>
           </div>
         </div>
-
-        <div class="hard_skills">
-          <div class="top">
-            <p class="title">Hard Skills</p>
-            <i id="add_hard_skill" class="fas fa-plus"></i>
-          </div>
-          <div class="forms form_hard_skills">
-            <i id="close_hard_skills_form" class="fas fa-times close_forms"></i>
-            <div>
-              <h3>Adicione uma Hard Skill</h3>
-            </div>
-            <form>
-              <input
-                id="hard_skill_name"
-                type="text"
-                placeholder="Nome da Hard Skill"
-              />
-              <button type="submit">Enviar</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="skills" id="skills2">
         <div class="education">
-          <p class="title">Educação</p>
-        </div>
-        <div class="softSkills_pContacts">
-          <div class="soft_skills">
-            <div class="top">
-              <p class="title">Soft Skills</p>
-              <i id="add_soft_skill" class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="personal_contacts">
-            <p class="title">personal_contacts</p>
+          <div class="top">
+            <p class="title">EDUCAÇÃO</p>
+            <i id="add_edu" class="fas fa-plus"></i>
           </div>
         </div>
-      </div>
+      </main>
     </div>
-    <footer>
+    <!-- <footer>
       <p>Alguma coisa</p>
-    </footer>
+    </footer> -->
   </body>
 </html>

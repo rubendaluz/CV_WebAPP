@@ -8,12 +8,12 @@
 
 .title {
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: x-large;
+  font-size: large;
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
 
 header {
@@ -42,7 +42,27 @@ header {
 }
 
 .menu li a:hover {
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #000;
+  cursor: pointer;
+}
+
+.edit_remove:hover {
+  cursor: pointer;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr;
+  height: 30vh;
+  width: 95%;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  border-bottom: 3px solid rgb(185, 183, 183);
+}
+
+.name {
+  font-size: larger;
 }
 
 .cv_title_icon {
@@ -56,68 +76,62 @@ header {
 }
 
 .page_content {
-  max-width: 80%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   margin: auto;
+}
+
+aside {
+  padding: 20px;
+  border-right: 3px solid rgb(185, 183, 183);
+}
+
+main {
+  padding: 20px;
 }
 
 .profile {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1.5fr 2.5fr;
   height: 30vh;
   border: 1px solid #fff;
   padding: 10px;
 }
 
 .profile_pic_section {
-  display: grid;
-  grid-template-rows: 3fr 1fr;
-  margin: auto;
+  height: 80%;
 }
 .profile_pic {
+  height: 100%;
   background-image: url(img/R.png);
   background-position: center;
   background-size: cover;
 }
-.description .title {
+.title {
   padding: 0px 10px;
   margin-left: 20px;
+  text-align: left;
+  border-bottom: 1px solid rgb(185, 183, 183);
+  max-width: 95%;
 }
 .info {
   padding: 30px;
 }
 
 /* Secção da Experiencia */
-.work_experience {
-  border: 1px solid #fff;
+.work_experience,
+.education {
   margin-top: 15px;
-  height: 60vh;
   padding: 10px;
 }
 
 .skills {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   grid-gap: 15px;
   margin-top: 15px;
   height: 50vh;
-}
-
-.skills > div {
-  border: 1px solid #fff;
-  /* padding: 15px; */
-}
-
-.skills .title {
-  text-align: center;
-}
-
-#skills2 {
-  height: 60vh;
-}
-
-.softSkills_pContacts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 /* Secção das linguagens de programação */
@@ -132,12 +146,11 @@ header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px 15px;
 }
 
 .lang {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 10% 70% 20%;
   justify-content: center;
   align-items: center;
 }
@@ -145,20 +158,21 @@ header {
 .skill_bar {
   width: 100%;
   margin: 15px;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 15px;
   overflow: hidden;
 }
 
 .lang1_amount {
   background-color: green;
-  padding: 10px;
+  padding: 8px;
 }
 
 .edit_remove {
   display: flex;
   flex-direction: row;
-  margin: 10px auto;
+  margin: 10px;
+  padding: 10px;
 }
 
 .edit_remove > i {
@@ -176,6 +190,7 @@ header {
   padding: 20px;
   z-index: 9999;
   width: 500px;
+  box-shadow: 5px 10px 15px #000;
 }
 
 .forms > form {
@@ -194,4 +209,48 @@ header {
   top: 2%;
   left: 95%;
   right: 90%;
+}
+
+/* Secção das Hard skills */
+
+.hard_skills_conteiner {
+  padding: 10px 25px;
+  list-style: none;
+}
+
+.hard_skills_conteiner > li {
+  padding: 10px;
+  background-color: grey;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+/* Seccão de Experiencia Profissional */
+
+.prof_xp_conteiner {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
+.work_xp {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.job_info {
+  max-width: 80%;
+}
+
+/* Secção de Contactos */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+}
+
+.contact > * {
+  margin: auto 5px 5px 5px;
 }
