@@ -159,18 +159,80 @@
           <div class="socials">
             <div class="top">
               <p class="title">SOCIAL</p>
-              <i id="addSocial" class="fas fa-plus"></i>
+              <i id="add_social" class="fas fa-plus"></i>
             </div>
-            <!-- Telegram -->
-            <i class="fas fa-paper-plane"></i>
-            <!-- Youtube -->
-            <i class="fab fa-youtube"></i>
-            <!-- linkedin -->
-            <i class="fab fa-linkedin"></i>
-            <!-- Github -->
-            <i class="fab fa-github"></i>
-            <!-- Facebook -->
-            <i class="fab fa-facebook-square"></i>
+            <div class="conteiner_socials"></div>
+            <div class="forms form_add_social">
+              <i id="close_social_form" class="fas fa-times close_forms"></i>
+              <div>
+                <h3>Adicione um novo contacto</h3>
+              </div>
+              <form action="">
+                <fieldset id="social_type_selection">
+                  <legend>
+                    Selecione a rede social que pretende adicionar:
+                  </legend>
+                  <div>
+                    <input
+                      type="radio"
+                      id="selectSocialTelegram"
+                      name="select"
+                      value="select"
+                      checked
+                    />
+                    <label for="selectSocialTelegram">Telegram</label>
+
+                    <input
+                      type="radio"
+                      id="selectSocialYoutube"
+                      name="select"
+                    />
+                    <label for="selectSocialYoutube">Youtube</label>
+
+                    <input
+                      type="radio"
+                      id="selectSocialLinkedin"
+                      name="select"
+                    />
+                    <label for="selectSocialLinkedin">Linkedin</label>
+
+                    <input type="radio" id="selectSocialGithub" name="select" />
+                    <label for="selectSocialGithub">Github</label>
+
+                    <input
+                      type="radio"
+                      id="selectSocialFacebook"
+                      name="select"
+                    />
+                    <label for="selectSocialFacebook">Facebook</label>
+
+                    <div class="insert_telegram">
+                      <label for="telegram">Insira o seu telegram: </label>
+                      <input type="number" name="telegram" id="telegram" />
+                    </div>
+                    <div class="insert_youtube">
+                      <label for="youtube">Insira o nome do su canal: </label>
+                      <input type="text" name="youtube" id="youtube" />
+                    </div>
+                    <div class="insert_linkedin">
+                      <label for="linkedin">Insira o seu Linkedin: </label>
+                      <input type="url" name="linkedin" id="linkedin" />
+                    </div>
+
+                    <div class="insert_github">
+                      <label for="github">Insira o seu Github: </label>
+                      <input type="url" name="github" id="github" />
+                    </div>
+
+                    <div class="insert_facebook">
+                      <label for="facebook">Insira o seu facebook: </label>
+                      <input type="url" name="facebook" id="facebook" />
+                    </div>
+                  </div>
+                  <button type="submit">Submit</button>
+                </fieldset>
+              </form>
+            </div>
           </div>
         </div>
       </aside>
@@ -180,12 +242,12 @@
             <div class="top">
               <p class="title">PERFIL</p>
               <div class="edit_remove">
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-edit" id="btn_edit_info_text"></i>
               </div>
             </div>
 
             <div class="info">
-              <p>
+              <p id="info_text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Eveniet, quos ipsa sint modi eaque quis qui unde dolore pariatur
                 cupiditate vero eius quidem facilis voluptates vitae. Quia
@@ -193,6 +255,22 @@
                 necessitatibus quidem laboriosam assumenda dolor dicta quasi
                 possimus ipsa quae tenetur maxime consequatur soluta.
               </p>
+            </div>
+
+            <div class="forms edit_info_form">
+              <i id="close_info_form" class="fas fa-times close_forms"></i>
+              <div>
+                <h3>Adicione um novo contacto</h3>
+              </div>
+              <form action="">
+                <textarea
+                  name=""
+                  id="input_info"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+                <button type="submit">Submit</button>
+              </form>
             </div>
           </div>
         </div>

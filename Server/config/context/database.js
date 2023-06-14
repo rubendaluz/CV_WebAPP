@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+import { Sequelize } from "sequelize";
 
 // CREATE DATABASE pw;
 // CREATE USER 'pw'@'%' IDENTIFIED BY 'pw';

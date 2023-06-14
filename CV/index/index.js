@@ -335,4 +335,236 @@ document.addEventListener("DOMContentLoaded", () => {
     //fecha a janela do formulario
     closeContactsForm();
   });
+
+  // Secção de Contactos
+  // Variaveis correspondentes a Secção de Contactos
+  const btnAddSocial = document.querySelector("#add_social");
+  const socialConteiner = document.querySelector(".conteiner_socials");
+  const socialsForm = document.querySelector(".form_add_social");
+  const btnCloseSocialsForm = document.querySelector("#close_social_form");
+  // let id_socials = 1;
+  // const ma = 6;
+
+  // Funções correspondentes a secção
+
+  let addTelegram = (telegram) => {
+    socialConteiner.innerHTML += `
+    <div class="contact" id="social_telegram">
+    <i class="fas fa-paper-plane"></i>
+    <p>${telegram}</p>
+    <div class="edit_remove">
+      <i class="fas fa-edit"></i>
+      <i class="fas fa-trash-alt"></i>
+    </div>
+  </div>
+    `;
+  };
+
+  let addYoutube = (channel) => {
+    csocialConteiner.innerHTML += `
+    <div class="contact" id="social_youtube">
+    <i class="fab fa-youtube"></i>
+      <p>${channel}</p>
+      <div class="edit_remove">
+        <i class="fas fa-edit"></i>
+        <i class="fas fa-trash-alt"></i>
+      </div>
+    </div>
+    `;
+  };
+
+  let addLinkedin = (link) => {
+    socialConteiner.innerHTML += `
+    <div class="contact" id="contact_whatsapp">
+      <i class="fab fa-linkedin"></i>
+      <p>${link}</p>
+      <div class="edit_remove">
+        <i class="fas fa-edit"></i>
+        <i class="fas fa-trash-alt"></i>
+      </div>
+    </div>
+    `;
+  };
+
+  let addGithub = (link) => {
+    socialConteiner.innerHTML += `
+    <div class="contact" id="contact_whatsapp">
+      <i class="fab fa-github"></i>
+      <p>${link}</p>
+      <div class="edit_remove">
+        <i class="fas fa-edit"></i>
+        <i class="fas fa-trash-alt"></i>
+      </div>
+    </div>
+    `;
+  };
+
+  let addFacebook = (link) => {
+    socialConteiner.innerHTML += `
+    <div class="contact" id="contact_whatsapp">
+      <i class="fab fa-facebook-square"></i>
+      <p>${link}</p>
+      <div class="edit_remove">
+        <i class="fas fa-edit"></i>
+        <i class="fas fa-trash-alt"></i>
+      </div>
+    </div>
+    `;
+  };
+
+  let openSocialsForm = () => {
+    socialsForm.style.display = "block";
+  };
+
+  let closeSocialsForm = () => {
+    socialsForm.style.display = "none";
+  };
+
+  btnCloseSocialsForm.addEventListener("click", (e) => {
+    closeSocialsForm();
+  });
+
+  let selectedSocialType;
+  btnAddSocial.addEventListener("click", (e) => {
+    openSocialsForm();
+    selectedSocialType = checkSelectedSocialType();
+    hideInputsSocials(selectedSocialType);
+  });
+
+  document
+    .querySelector("#social_type_selection")
+    .addEventListener("change", (e) => {
+      selectedSocialType = checkSelectedSocialType();
+      hideInputsSocials(selectedSocialType);
+    });
+
+  let checkSelectedSocialType = () => {
+    let selectSocialTelegram = document.querySelector("#selectSocialTelegram");
+    let selectSocialYoutube = document.querySelector("#selectSocialYoutube");
+    let selectSocialLinkedin = document.querySelector("#selectSocialLinkedin");
+    let selectSocialGithub = document.querySelector("#selectSocialGithub");
+    let selectSocialFacebook = document.querySelector("#selectSocialFacebook");
+    if (selectSocialFacebook.checked) return "facebook_selected";
+    else if (selectSocialGithub.checked) return "github_selected";
+    else if (selectSocialLinkedin.checked) return "linkedin_selected";
+    else if (selectSocialTelegram.checked) return "telegram_selected";
+    else if (selectSocialYoutube.checked) return "youtube_selected";
+  };
+
+  let hideInputsSocials = (selected) => {
+    let insert_telegram = document.querySelector(".insert_telegram");
+    let insert_youtube = document.querySelector(".insert_youtube");
+    let insert_linkedin = document.querySelector(".insert_linkedin");
+    let insert_github = document.querySelector(".insert_github");
+    let insert_facebook = document.querySelector(".insert_facebook");
+
+    switch (selected) {
+      case "telegram_selected":
+        insert_telegram.style.display = "block";
+        insert_youtube.style.display = "none";
+        insert_linkedin.style.display = "none";
+        insert_github.style.display = "none";
+        insert_facebook.style.display = "none";
+        break;
+
+      case "youtube_selected":
+        insert_telegram.style.display = "none";
+        insert_youtube.style.display = "block";
+        insert_linkedin.style.display = "none";
+        insert_github.style.display = "none";
+        insert_facebook.style.display = "none";
+        break;
+
+      case "linkedin_selected":
+        insert_telegram.style.display = "none";
+        insert_youtube.style.display = "none";
+        insert_linkedin.style.display = "block";
+        insert_github.style.display = "none";
+        insert_facebook.style.display = "none";
+        break;
+
+      case "github_selected":
+        insert_telegram.style.display = "none";
+        insert_youtube.style.display = "none";
+        insert_linkedin.style.display = "none";
+        insert_github.style.display = "block";
+        insert_facebook.style.display = "none";
+        break;
+      case "facebook_selected":
+        insert_telegram.style.display = "none";
+        insert_youtube.style.display = "none";
+        insert_linkedin.style.display = "none";
+        insert_github.style.display = "none";
+        insert_facebook.style.display = "block";
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  socialsForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Impede o envio do formulário por padrão
+    // Obter os valores dos campos
+    let telegram = document.querySelector("#telegram").value;
+    let youtube = document.querySelector("#youtube").value;
+    let linkedin = document.querySelector("#linkedin").value;
+    let github = document.querySelector("#github").value;
+    let facebook = document.querySelector("#facebook").value;
+
+    console.log("working...");
+
+    switch (checkSelectedSocialType()) {
+      case "telegram_selected":
+        addTelegram(telegram);
+        break;
+
+      case "youtube_selected":
+        addYoutube(youtube);
+        break;
+
+      case "linkedin_selected":
+        addLinkedin(linkedin);
+        break;
+
+      case "github_selected":
+        addGithub(github);
+        break;
+      case "facebook_slected":
+        addFacebook(facebook);
+        break;
+
+      default:
+        break;
+    }
+    //fecha a janela do formulario
+    closeSocialsForm();
+  });
+
+  // Secção perfil
+  let btnEditInfoText = document.querySelector("#btn_edit_info_text");
+  let infoForm = document.querySelector(".edit_info_form");
+  let btnCloseInfoForm = document.querySelector("#close_info_form");
+  let text = document.querySelector("#info_text").innerHTML;
+  let input_info = document.querySelector("#input_info");
+
+  let openInfoForm = () => {
+    infoForm.style.display = "block";
+  };
+
+  btnCloseInfoForm.addEventListener("click", (e) => {
+    infoForm.style.display = "none";
+  });
+
+  btnEditInfoText.addEventListener("click", (e) => {
+    openInfoForm();
+    input_info.innerHTML = text;
+  });
+
+  infoForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Impede o envio do formulário por padrão
+    nextText = document.querySelector("#input_info").value;
+    input_info.innerHTML = "";
+    input_info.innerHTML = nextText;
+  });
 });

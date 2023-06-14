@@ -1,41 +1,42 @@
-// Importar node packages
 import express from "express";
-import cors from "cors";
-import morgan from "morgan";
+// import cors from "cors";
+// import morgan from "morgan";
 import "dotenv/config";
 
-// SERVER ROUTES
-// import { api } from "./routes/index.js";
-import { database } from "./config/context/database.js";
+import bodyParser from "body-parser";
 
-//--REST SERVER--//
 const server = express();
+server.use(bodyParser.json());
 
-// client can be postman | react website | react localhost link | etc
-const clientURL = "*";
+server.get("/", (req, res) => {
+  res.send("Server is running.");
+});
 
-// CORS options
-const corsOptions = {
-  origin: clientURL,
-};
-server.use(cors(corsOptions));
+// // client can be postman | react website | react localhost link | etc
+// const clientURL = "*";
 
-// output dados de pedido HTTP - logger
-server.use(morgan("short"));
+// // CORS options
+// const corsOptions = {
+//   origin: clientURL,
+// };
+// server.use(cors(corsOptions));
 
-// parse dados dos pedidos no content-type - application/json
-server.use(express.json());
+// // output dados de pedido HTTP - logger
+// server.use(morgan("short"));
 
-// http://localhost:4242/api ......
+// // parse dados dos pedidos no content-type - application/json
+// server.use(express.json());
+
+// // http://localhost:4242/api ......
 // server.use("/api", api);
 
 //Fazer ligação à Base de Dados
 // npm install --save mysql2
-try {
-  database.sync({ force: false, alter: true });
-} catch (error) {
-  console.info(error);
-}
+// try {
+//   database.sync({ force: false, alter: true });
+// } catch (error) {
+//   console.info(error);
+// }
 
 // correr server no url host:port definido em .env
 server.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
