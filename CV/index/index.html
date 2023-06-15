@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+
     <title>My CV</title>
   </head>
   <body>
@@ -20,8 +21,11 @@
       </div>
       <div class="menu">
         <ul id="menu">
-          <li><a id="login_button">Login</a></li>
-          <li><a id="login_button">Sign in</a></li>
+          <li>
+            <a href="../auth_page/index.html" id="login_button">Login</a>
+          </li>
+          <li><i id="download" class="fas fa-download"></i></li>
+          <!-- <li><a id="login_button">Sign in</a></li> -->
         </ul>
       </div>
     </header>
@@ -30,8 +34,8 @@
         <div class="profile_pic"></div>
       </div>
       <div class="name">
-        <h3 id="name">Ruben da Luz</h3>
-        <p id="profissao">Engenheiro Redes e sistemas de Computadores</p>
+        <h3 id="myName"></h3>
+        <p id="myJob"></p>
       </div>
     </div>
     <div class="page_content">
@@ -56,7 +60,9 @@
             </div>
             <form action="">
               <fieldset id="contact_type_selection">
-                <legend>Please select your preferred contact method:</legend>
+                <legend>
+                  Por favor selecione o contacto que pretende adicionar:
+                </legend>
                 <div>
                   <input
                     type="radio"
@@ -247,14 +253,7 @@
             </div>
 
             <div class="info">
-              <p id="info_text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Eveniet, quos ipsa sint modi eaque quis qui unde dolore pariatur
-                cupiditate vero eius quidem facilis voluptates vitae. Quia
-                laboriosam sapiente sequi quae molestias. Beatae inventore
-                necessitatibus quidem laboriosam assumenda dolor dicta quasi
-                possimus ipsa quae tenetur maxime consequatur soluta.
-              </p>
+              <p id="info_text"></p>
             </div>
 
             <div class="forms edit_info_form">
@@ -279,44 +278,43 @@
             <p class="title">EXPERIÊNCIA PROFISSIONAL</p>
             <i id="add_work_xp" class="fas fa-plus"></i>
           </div>
-          <div class="prof_xp_conteiner">
-            <div class="forms form_add_work_xp">
-              <i id="close_work_xp_form" class="fas fa-times close_forms"></i>
-              <div>
-                <h3>Adicione uma Experiencia Profissional</h3>
-              </div>
-              <form>
-                <input
-                  id="company_name"
-                  type="text"
-                  placeholder="Nome da Empresa"
-                  required
-                />
-                <div>
-                  <label for="entrance_date">Ano de entrada</label>
-                  <input type="year" name="entrance_date" id="entrance_date" />
-                </div>
-
-                <div>
-                  <label for="exit_date">Ano de saída</label>
-                  <input type="year" name="exit_date" id="exit_date" />
-                </div>
-
-                <input
-                  id="job_name"
-                  type="text"
-                  placeholder="Nome do Cargo"
-                  required
-                />
-                <input
-                  id="job_description"
-                  type="text"
-                  placeholder="Descrição do Cargo"
-                  required
-                />
-                <button type="submit">Enviar</button>
-              </form>
+          <div class="prof_xp_conteiner"></div>
+          <div class="forms form_add_work_xp">
+            <i id="close_work_xp_form" class="fas fa-times close_forms"></i>
+            <div>
+              <h3>Adicione uma Experiencia Profissional</h3>
             </div>
+            <form>
+              <input
+                id="company_name"
+                type="text"
+                placeholder="Nome da Empresa"
+                required
+              />
+              <div>
+                <label for="entrance_date">Ano de entrada</label>
+                <input type="year" name="entrance_date" id="entrance_date" />
+              </div>
+
+              <div>
+                <label for="exit_date">Ano de saída</label>
+                <input type="year" name="exit_date" id="exit_date" />
+              </div>
+
+              <input
+                id="job_name"
+                type="text"
+                placeholder="Nome do Cargo"
+                required
+              />
+              <input
+                id="job_description"
+                type="text"
+                placeholder="Descrição do Cargo"
+                required
+              />
+              <button type="submit">Enviar</button>
+            </form>
           </div>
         </div>
         <div class="education">
@@ -324,11 +322,54 @@
             <p class="title">EDUCAÇÃO</p>
             <i id="add_edu" class="fas fa-plus"></i>
           </div>
+          <div class="habs_conteiner"></div>
+          <div class="forms form_add_hab">
+            <i id="close_habs_form" class="fas fa-times close_forms"></i>
+            <div>
+              <h3>Adicione uma Habilitação literaria</h3>
+            </div>
+            <form>
+              <input id="grade" type="text" placeholder="Grau" required />
+              <input
+                id="institute"
+                type="text"
+                placeholder="Instituição"
+                required
+              />
+              <input
+                id="type_course"
+                type="text"
+                placeholder="Tipo de Curso"
+                required
+              />
+              <input
+                id="course_name"
+                type="text"
+                placeholder="Nome do Curso"
+                required
+              />
+              <div>
+                <label for="entry_year">Ano de entrada</label>
+                <input type="year" name="entry_year" id="entry_year" />
+              </div>
+
+              <div>
+                <label for="end_date">Ano de saída</label>
+                <input type="year" name="exit_date" id="end_year" />
+              </div>
+
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
         </div>
       </main>
     </div>
-    <!-- <footer>
-      <p>Alguma coisa</p>
-    </footer> -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; 2023 Rúben da Luz. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

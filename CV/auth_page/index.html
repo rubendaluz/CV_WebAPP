@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Auth Page</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="POST" class="form" id="login">
+        <h1 class="form_title">Login</h1>
+        <div class="form_message form-error"></div>
+        <div class="form_input_group">
+          <input
+            type="text"
+            class="from_input"
+            autofocus
+            placeholder="Nome de usuário ou email"
+            id="username"
+          />
+          <div class="form_input-error-message"></div>
+        </div>
+        <div class="form_input_group">
+          <input
+            type="password"
+            class="from_input"
+            autofocus
+            placeholder="Password"
+            id="password"
+          />
+        </div>
+        <button class="form_button" type="submit">login</button>
+        <p class="form_text">
+          <a href="#" class="form_link">Esqueceu a sua password?</a>
+        </p>
+        <p class="form_text">
+          <a id="linkCriarConta" class="form_link"
+            >Não tens uma conta? Criar conta</a
+          >
+        </p>
+      </form>
+
+      <form action="POST" class="form_hidden" id="CriarConta">
+        <h1 class="form_title">Nova Conta</h1>
+        <div class="form_message form-error"></div>
+        <div class="form_input_group">
+          <input
+            type="text"
+            class="from_input"
+            autofocus
+            placeholder="Nome de utilizador"
+            id="signupUsername"
+          />
+          <div class="form_input-error-message"></div>
+        </div>
+        <!-- <div class="form_input_group">
+          <input
+            type="text"
+            class="from_input"
+            placeholder="Endereço de email"
+          /> -->
+        <!-- <div class="form_input-error-message"></div>
+        </div> -->
+        <div class="form_input_group">
+          <input
+            type="password"
+            class="from_input"
+            autofocus
+            placeholder="Criar password"
+            id="signupPassword"
+          />
+        </div>
+        <!-- <div class="form_input_group">
+          <input
+            type="password"
+            class="from_input"
+            autofocus
+            placeholder="Confirmar password"
+          />
+        </div> -->
+        <button class="form_button" type="submit">login</button>
+        <p class="form_text">
+          <a href="#" class="form_link">Esqueceu a sua password?</a>
+        </p>
+        <p class="form_text">
+          <a id="linkLogin" class="form_link">Já tem uma conta? Entre...</a>
+        </p>
+      </form>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>

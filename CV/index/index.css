@@ -9,6 +9,15 @@
 .title {
   font-family: "IBM Plex Sans", sans-serif;
   font-size: large;
+  padding: 0px 10px;
+  margin-left: 20px;
+  text-align: left;
+  border-bottom: 1px solid rgb(185, 183, 183);
+  max-width: 95%;
+}
+
+p {
+  text-align: justify;
 }
 
 body {
@@ -16,6 +25,14 @@ body {
   color: #000;
 }
 
+footer {
+  height: 10vh;
+  border-top: 1px solid gray;
+  margin-top: 30px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
 header {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -33,16 +50,23 @@ header {
   font-size: 15pt;
 }
 
+.fa-plus {
+  display: none;
+}
+
 .menu li {
   margin: auto 15px;
 }
 
 .menu li a {
   padding: 10px;
+  color: #000;
+  text-decoration: none;
 }
 
 .menu li a:hover {
   border-bottom: 2px solid #000;
+  font-size: 90%;
   cursor: pointer;
 }
 
@@ -63,6 +87,9 @@ header {
 
 .name {
   font-size: larger;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cv_title_icon {
@@ -89,6 +116,10 @@ aside {
 
 main {
   padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-height: 150vh;
 }
 
 .profile {
@@ -100,21 +131,21 @@ main {
 }
 
 .profile_pic_section {
+  display: grid;
   height: 80%;
+  border-radius: 45%;
+  overflow: hidden;
+  align-items: center;
+  margin-right: 30px;
+  background-color: #000;
 }
 .profile_pic {
   height: 100%;
-  background-image: url(img/R.png);
+  background-image: url(img/ruben.jpg);
   background-position: center;
   background-size: cover;
 }
-.title {
-  padding: 0px 10px;
-  margin-left: 20px;
-  text-align: left;
-  border-bottom: 1px solid rgb(185, 183, 183);
-  max-width: 95%;
-}
+
 .info {
   padding: 30px;
 }
@@ -169,8 +200,8 @@ main {
 }
 
 .edit_remove {
-  display: flex;
-  flex-direction: row;
+  /* display: "flex"; */
+  /* flex-direction: row; */
   margin: 10px;
   padding: 10px;
 }
@@ -229,15 +260,21 @@ main {
 
 /* Seccão de Experiencia Profissional */
 
-.prof_xp_conteiner {
+.prof_xp_conteiner,
+.habs_conteiner {
   display: flex;
   flex-direction: column;
   padding: 20px 30px;
 }
 
-.work_xp {
+.work_xp,
+.habs {
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+
+.habs > * {
+  margin-right: 15px;
 }
 
 .job_info {

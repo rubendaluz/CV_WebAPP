@@ -1,11 +1,51 @@
+let addEmail,
+  addPhone,
+  addGithub,
+  addFacebook,
+  addWhatsapp,
+  addLinkedin,
+  addYoutube,
+  addTelegram;
+let insertLang;
+let insertHardSkill;
+let insertWorkXP;
+let edit_info;
+let insertHab;
+
+let id_contacts = 1;
+let id_langs = 1;
+let id_hard_skill = 1;
+let id_workXP = 1;
+let id_habs = 1;
+
+// Função para carregar o conteúdo protegido
+let loadProtectedContent = () => {
+  if (isTokenValid()) {
+    // Carregue o conteúdo protegido
+    console.log(isTokenValid());
+    document.querySelector(".edit_remove").style.display = "block";
+    document.querySelector(".fa-plus").style.display = "block";
+  } else {
+    // Redirecione para a página de login
+    //window.location.href = "../auth_page/index.html";
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+  getAllContacts();
+  getAllLangs();
+  getAllSkills();
+  getAllProfile();
+  loadProtectedContent();
+  getAllExperiences();
+  getAllHabs();
+
   // Variaveis correspondentes a secção de Linguagens de programação
   const btnAddLang = document.querySelector("#addLang");
   const langsConteiner = document.querySelector(".langs_container");
   const langsForm = document.querySelector(".form_add_lang");
   const btnCloseLangsForm = document.querySelector("#close_langs_form");
-  let id_langs = 1;
-  const max_langs = 6;
+  const max_langs = 10;
 
   // Variaveis correspondentes a secção de Hard skills
   const btnAddHardSkill = document.querySelector("#add_hard_skill");
@@ -14,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCloseHardSkillsForm = document.querySelector(
     "#close_hard_skills_form"
   );
-  let id_hard_skill = 1;
   const max_hard_skilss = 6;
 
   // Variaveis correspondentes a secção de Experiencia Profissional
@@ -22,11 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const WorkXPConteiner = document.querySelector(".prof_xp_conteiner");
   const WorkXPForm = document.querySelector(".form_add_work_xp");
   const btnCloseWorkXPForm = document.querySelector("#close_work_xp_form");
-  let id_workXP = 1;
   const max_WorkXPs = 6;
 
   // Funções correspondentes a secção de Linguagens de programação
-  let insertLang = (nome, exp, id) => {
+  insertLang = (nome, exp, id) => {
     langsConteiner.innerHTML += `
     <div class="lang" id="lang${id}">
     <p class="lang_name">${nome}</p>
@@ -67,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (id_langs <= max_langs) {
       console.log("working...");
       insertLang(lang_name, lang_xp, id_langs);
+      createLang(id_langs, lang_name, lang_xp);
       id_langs++;
     }
     // // Limpar os campos do formulário
@@ -77,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Funções correspondentes a secção de Hard Skills
-  let insertHardSkill = (nome, id) => {
+  insertHardSkill = (nome, id) => {
     HardSkillsConteiner.innerHTML += `<li id=hard_skill_${id}>
     ${nome}
     </li>`;
@@ -109,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (id_hard_skill <= max_hard_skilss) {
       console.log("working...");
       insertHardSkill(skill_name, id_hard_skill);
+      createSkill(id_hard_skill, skill_name);
       id_hard_skill++;
       console.log("Hard skill inserida com sucesso");
     }
@@ -124,14 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Funções correspondentes a secção
 
-  let insertWorkXP = (
-    nome,
-    entrance_year,
-    exit_year,
-    job_title,
-    job_desc,
-    id
-  ) => {
+  insertWorkXP = (nome, entrance_year, exit_year, job_title, job_desc, id) => {
     WorkXPConteiner.innerHTML += `<div class="work_xp" id="work_xp_${id}">
     <div>
       <h2 class="Company_name">${nome}</h2>
@@ -181,6 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
         job_description,
         id_workXP
       );
+      createExperience(
+        id_workXP,
+        company_name,
+        entrance_date,
+        exit_date,
+        job_name,
+        job_description
+      );
       id_workXP++;
     }
     // // Limpar os campos do formulário
@@ -199,12 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactsConteiner = document.querySelector(".conteiner_contacts");
   const contactsForm = document.querySelector(".form_add_contact");
   const btnClosecontactsForm = document.querySelector("#close_contacts_form");
-  let id_contacts = 1;
   const max_contacts = 6;
 
   // Funções correspondentes a secção
 
-  let addEmail = (email) => {
+  addEmail = (email) => {
     contactsConteiner.innerHTML += `
     <div class="contact" id="contact_email">
     <i class="fas fa-envelope-open"></i>
@@ -217,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addPhone = (phone) => {
+  addPhone = (phone) => {
     contactsConteiner.innerHTML += `
     <div class="contact" id="contact_phone_number">
       <i class="fas fa-phone-alt"></i>
@@ -230,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addWhatsapp = (whats) => {
+  addWhatsapp = (whats) => {
     contactsConteiner.innerHTML += `
     <div class="contact" id="contact_whatsapp">
       <i class="fab fa-whatsapp"></i>
@@ -318,14 +358,20 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (checkSelectedContactType()) {
       case "phone_selected":
         addPhone(phone);
+        createContact(id_contacts, "personal", "number", phone);
+        ++id_contacts;
         break;
 
       case "email_selected":
         addEmail(email);
+        createContact(id_contacts, "personal", "email", email);
+        ++id_contacts;
         break;
 
       case "whats_selected":
         addWhatsapp(whats);
+        createContact(id_contacts, "personal", "whatsapp", whats);
+        ++id_contacts;
         break;
 
       default:
@@ -347,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Funções correspondentes a secção
 
-  let addTelegram = (telegram) => {
+  addTelegram = (telegram) => {
     socialConteiner.innerHTML += `
     <div class="contact" id="social_telegram">
     <i class="fas fa-paper-plane"></i>
@@ -360,8 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addYoutube = (channel) => {
-    csocialConteiner.innerHTML += `
+  addYoutube = (channel) => {
+    socialConteiner.innerHTML += `
     <div class="contact" id="social_youtube">
     <i class="fab fa-youtube"></i>
       <p>${channel}</p>
@@ -373,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addLinkedin = (link) => {
+  addLinkedin = (link) => {
     socialConteiner.innerHTML += `
     <div class="contact" id="contact_whatsapp">
       <i class="fab fa-linkedin"></i>
@@ -386,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addGithub = (link) => {
+  addGithub = (link) => {
     socialConteiner.innerHTML += `
     <div class="contact" id="contact_whatsapp">
       <i class="fab fa-github"></i>
@@ -399,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  let addFacebook = (link) => {
+  addFacebook = (link) => {
     socialConteiner.innerHTML += `
     <div class="contact" id="contact_whatsapp">
       <i class="fab fa-facebook-square"></i>
@@ -517,21 +563,31 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (checkSelectedSocialType()) {
       case "telegram_selected":
         addTelegram(telegram);
+        createContact(id_contacts, "social", "telegram", telegram);
+        ++id_contacts;
         break;
 
       case "youtube_selected":
         addYoutube(youtube);
+        createContact(id_contacts, "social", "youtube", youtube);
+        ++id_contacts;
         break;
 
       case "linkedin_selected":
         addLinkedin(linkedin);
+        createContact(id_contacts, "social", "linkedin", linkedin);
+        ++id_contacts;
         break;
 
       case "github_selected":
         addGithub(github);
+        createContact(id_contacts, "social", "github", github);
+        ++id_contacts;
         break;
       case "facebook_slected":
         addFacebook(facebook);
+        createContact(id_contacts, "social", "facebook", facebook);
+        ++id_contacts;
         break;
 
       default:
@@ -561,10 +617,526 @@ document.addEventListener("DOMContentLoaded", () => {
     input_info.innerHTML = text;
   });
 
+  edit_info = (info) => {
+    const conteiner = document.querySelector("#info_text");
+    conteiner.innerHTML = info;
+  };
+
   infoForm.addEventListener("submit", (e) => {
     e.preventDefault(); // Impede o envio do formulário por padrão
-    nextText = document.querySelector("#input_info").value;
-    input_info.innerHTML = "";
-    input_info.innerHTML = nextText;
+    const nextText = document.querySelector("#input_info").value;
+    edit_info(nextText);
+    editProfileText(1, nextText);
+  });
+
+  // Secção Educação
+
+  let btnAddEdu = document.querySelector("#add_edu");
+  let eduForm = document.querySelector(".form_add_hab");
+  let btnCloseEduForm = document.querySelector("#close_habs_form");
+  let habsConteiner = document.querySelector(".habs_conteiner");
+
+  insertHab = (
+    institute,
+    grade,
+    entry_year,
+    end_year,
+    course_name,
+    type_course,
+    id
+  ) => {
+    habsConteiner.innerHTML += `<div class="habs" id="hab_${id}">
+    <div>
+      <h2 class="institute_name">${institute}</h2>
+      <p>${grade}</p>
+      <p>${entry_year}-${end_year}</p>
+    </div>
+    <div class="hab_info">
+      <h2 class="job_title">${course_name}</h2>
+      <p class="job_description">
+        ${type_course}
+      </p>
+    </div>
+  </div>`;
+  };
+
+  btnAddEdu.addEventListener("click", (e) => {
+    eduForm.style.display = "block";
+  });
+
+  let closeEduForm = () => {
+    eduForm.style.display = "none";
+  };
+
+  btnCloseEduForm.addEventListener("click", (e) => {
+    closeEduForm();
+  });
+
+  eduForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const institute = document.querySelector("#institute").value;
+    const grade = document.querySelector("#grade").value;
+    const type_course = document.querySelector("#type_course").value;
+    const course_name = document.querySelector("#course_name").value;
+    const entry_year = document.querySelector("#entry_year").value;
+    const end_year = document.querySelector("#end_year").value;
+
+    console.log("working");
+    insertHab(
+      institute,
+      grade,
+      entry_year,
+      end_year,
+      course_name,
+      type_course,
+      1
+    );
+    createHab(
+      id_habs,
+      grade,
+      institute,
+      type_course,
+      entry_year,
+      end_year,
+      course_name,
+      type_course
+    );
+    id_habs++;
+
+    closeEduForm();
+  });
+
+  //
+
+  document.querySelector("#download").addEventListener("click", (e) => {
+    e.preventDefault();
+    downloadAsPDF();
   });
 });
+
+// Verifica se o token está presente e válido
+let isTokenValid = () => {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  if (!token) {
+    // Token não está presente
+    console.log("Token não está presente");
+    return false;
+  }
+
+  // Verifique o token no servidor (exemplo: usando a biblioteca jsonwebtoken)
+  try {
+    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    console.log("O token é válido");
+    return true;
+  } catch (error) {
+    // O token é inválido ou expirou
+    console.log("O token não é válido");
+    return false;
+  }
+};
+
+let getAllContacts = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/contacts/getAllContacts";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const contacts = JSON.parse(xhr.responseText);
+      console.log(contacts);
+      // Atualizar o conteúdo do elemento com as informações dos produtos
+      contacts.forEach((contact) => {
+        if (contact["classe"] == "personal") {
+          if (contact["type"] == "email") {
+            addEmail(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "number") {
+            addPhone(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "whatsapp") {
+            addWhatsapp(contact["content"]);
+            ++id_contacts;
+          }
+        } else if (contact["classe"] == "social") {
+          if (contact["type"] == "telegram") {
+            addTelegram(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "github") {
+            addGithub(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "youtube") {
+            addYoutube(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "linkedin") {
+            addLinkedin(contact["content"]);
+            ++id_contacts;
+          } else if (contact["type"] == "facebook") {
+            addFacebook(contact["content"]);
+            ++id_contacts;
+          }
+        }
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+// let createContact = (id, classe, tipo, content) => {
+//   // Fazer uma requisição AJAX para obter as informações dos produtos
+//   const data = { id, classe, tipo, content };
+//   const xhr = new XMLHttpRequest();
+//   // Replace with your login endpoint URL
+
+//   const url = "http://localhost:4242/api/contacts/createContact";
+//   xhr.open("POST", url, true);
+//   xhr.setRequestHeader("Content-Type", "application/json");
+
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState === 4 && xhr.status === 201) {
+//       const response = JSON.parse(xhr.responseText);
+//       console.log(response);
+//     } else if (xhr.readyState === 4) {
+//       console.error(
+//         "Erro ao fazer a solicitação. Código de status: " + xhr.status
+//       );
+//     }
+//   };
+
+//   const dataJSON = JSON.stringify({ data });
+//   console.log(dataJSON);
+
+//   xhr.send(dataJSON);
+// };
+
+let createContact = (id, classe, type, content) => {
+  const data = { id, classe, type, content };
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:4242/api/contacts/createContact";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+      } else {
+        console.error(
+          "Erro ao fazer a solicitação. Código de status: " + xhr.status
+        );
+      }
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+};
+
+let getAllLangs = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/langs/getAllLangs";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const langs = JSON.parse(xhr.responseText);
+      console.log(langs);
+      // Atualizar o conteúdo
+      langs.forEach((lang) => {
+        insertLang(lang["nome"], lang["exp"], lang["id"]);
+        ++id_langs;
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+let createLang = (id, nome, exp) => {
+  const data = { id, nome, exp };
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:4242/api/langs/createLang";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+      } else {
+        console.error(
+          "Erro ao fazer a solicitação. Código de status: " + xhr.status
+        );
+      }
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+};
+
+let getAllSkills = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/skills/getAllSkills";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const skills = JSON.parse(xhr.responseText);
+      console.log(skills);
+      // Atualizar o conteúdo
+      skills.forEach((skill) => {
+        insertHardSkill(skill["name"], skill["id"]);
+        id_hard_skill++;
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+let createSkill = (id, name) => {
+  const data = { id, name };
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:4242/api/skills/createSkill";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+      } else {
+        console.error(
+          "Erro ao fazer a solicitação. Código de status: " + xhr.status
+        );
+      }
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+};
+
+let getAllProfile = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  const myName = document.querySelector("#myName");
+  const myJob = document.querySelector("#myJob");
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/profile/getAllProfile";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const profile = JSON.parse(xhr.responseText);
+      console.log(profile);
+      // Atualizar o conteúdo
+      profile.forEach((profile) => {
+        edit_info(profile["description"]);
+        myName.innerHTML = profile["name"];
+        myJob.innerHTML = profile["job"];
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+let editProfileText = async (profileId, text) => {
+  const data = { text };
+
+  try {
+    const url = `http://localhost:4242/api/profile/editInfo/:${profileId}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log(responseData);
+    } else {
+      console.error("Erro na solicitação. Código de status:", response.status);
+    }
+  } catch (error) {
+    console.error("Erro durante a solicitação:", error);
+  }
+};
+
+let getAllExperiences = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/experiences/getAllExperiences";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const expirences = JSON.parse(xhr.responseText);
+      console.log(expirences);
+      // Atualizar o conteúdo
+      expirences.forEach((expirence) => {
+        insertWorkXP(
+          expirence["company_name"],
+          expirence["entry_year"],
+          expirence["end_year"],
+          expirence["job"],
+          expirence["description"],
+          expirence["id"]
+        );
+        id_workXP++;
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+let createExperience = (
+  id,
+  company_name,
+  entry_year,
+  end_year,
+  job,
+  description
+) => {
+  const data = {
+    id,
+    company_name,
+    entry_year,
+    end_year,
+    job,
+    description,
+  };
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:4242/api/expirences/createExperiences";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+      } else {
+        console.error(
+          "Erro ao fazer a solicitação. Código de status: " + xhr.status
+        );
+      }
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+};
+
+let getAllHabs = () => {
+  // Fazer uma requisição AJAX para obter as informações dos produtos
+  const xhr = new XMLHttpRequest();
+  // Replace with your login endpoint URL
+  const url = "http://localhost:4242/api/habs/getAllHabs";
+  xhr.open("GET", url);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const habs = JSON.parse(xhr.responseText);
+      console.log(habs);
+      // Atualizar o conteúdo
+      habs.forEach((hab) => {
+        insertHab(
+          hab["institute"],
+          hab["grade"],
+          hab["entry_year"],
+          hab["end_year"],
+          hab["course_name"],
+          hab["type_course"],
+          hab["id"]
+        );
+        id_habs++;
+      });
+    } else {
+      console.error("Erro ao obter os produtos:", xhr.status);
+    }
+  };
+  xhr.send();
+};
+
+let createHab = (
+  id,
+  grade,
+  institute,
+  type_course,
+  course_name,
+  entry_year,
+  end_year
+) => {
+  const data = {
+    id,
+    grade,
+    institute,
+    type_course,
+    course_name,
+    entry_year,
+    end_year,
+  };
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:4242/api/habs/createHab";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+      } else {
+        console.error(
+          "Erro ao fazer a solicitação. Código de status: " + xhr.status
+        );
+      }
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+};
+
+function downloadAsPDF() {
+  //import jsPDF from "jspdf";
+  // Cria um novo objeto jsPDF
+  const pdf = new jsPDF();
+
+  // Obtém o conteúdo HTML da página atual
+  const htmlContent = document.documentElement;
+
+  // Converte o conteúdo HTML para PDF
+  pdf.html(htmlContent, {
+    callback: function () {
+      // Salva o PDF como um arquivo
+      pdf.save("pagina.pdf");
+    },
+  });
+}
