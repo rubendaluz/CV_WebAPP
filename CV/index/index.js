@@ -608,6 +608,10 @@ document.addEventListener("DOMContentLoaded", () => {
     infoForm.style.display = "block";
   };
 
+  let closeInfoForm = () => {
+    infoForm.style.display = "none";
+  };
+
   btnCloseInfoForm.addEventListener("click", (e) => {
     infoForm.style.display = "none";
   });
@@ -620,6 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
   edit_info = (info) => {
     const conteiner = document.querySelector("#info_text");
     conteiner.innerHTML = info;
+    closeInfoForm();
   };
 
   infoForm.addEventListener("submit", (e) => {
