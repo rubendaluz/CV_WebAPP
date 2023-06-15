@@ -116,10 +116,9 @@ aside {
 
 main {
   padding: 20px;
-  height: 100vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  max-height: 150vh;
 }
 
 .profile {
@@ -132,7 +131,8 @@ main {
 
 .profile_pic_section {
   display: grid;
-  height: 80%;
+  height: 90%;
+  width: 250px;
   border-radius: 45%;
   overflow: hidden;
   align-items: center;
@@ -271,6 +271,7 @@ main {
 .habs {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  margin-top: 30px;
 }
 
 .habs > * {

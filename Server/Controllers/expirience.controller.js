@@ -15,7 +15,7 @@ const createExperience = async (req, res) => {
     const { id, company_name, entry_year, end_year, job, description } =
       req.body;
 
-    const newExperience = await HabModel.create({
+    const newExperience = await ExperienceModel.create({
       id: id,
       company_name: company_name,
       entry_year: entry_year,

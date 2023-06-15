@@ -626,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault(); // Impede o envio do formulário por padrão
     const nextText = document.querySelector("#input_info").value;
     edit_info(nextText);
-    editProfileText(1, nextText);
+    editProfileInfo(1, nextText);
   });
 
   // Secção Educação
@@ -959,25 +959,27 @@ let getAllProfile = () => {
   xhr.send();
 };
 
-let editProfileText = async (profileId, text) => {
-  const data = { text };
+const editProfileInfo = async (id, text) => {
+  const url = `http://localhost:4242/api/profile/editInfo`;
 
   try {
-    const url = `http://localhost:4242/api/profile/editInfo/:${profileId}`;
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log(responseData);
-    } else {
-      console.error("Erro na solicitação. Código de status:", response.status);
-    }
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          console.log(response);
+        } else {
+          console.error("Erro na solicitação. Código de status:", xhr.status);
+        }
+      }
+    };
+
+    const data = JSON.stringify({ id, text });
+    xhr.send(data);
   } catch (error) {
     console.error("Erro durante a solicitação:", error);
   }
@@ -1029,7 +1031,7 @@ let createExperience = (
     description,
   };
   const xhr = new XMLHttpRequest();
-  const url = "http://localhost:4242/api/expirences/createExperiences";
+  const url = "http://localhost:4242/api/experiences/createExperiences";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
 

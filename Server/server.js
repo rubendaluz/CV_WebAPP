@@ -40,11 +40,6 @@ server.get("/api", (req, res) => {
   res.send("api is running.");
 });
 
-// http://localhost:4242/api/protected
-server.get("/api/protected", verifyToken, (req, res) => {
-  res.status(200).json({ message: "Protected route accessed successfully" });
-});
-
 //Fazer ligação à Base de Dados
 // npm install --save mysql2
 try {
@@ -52,6 +47,12 @@ try {
 } catch (error) {
   console.info(error);
 }
+
+// Rota protegida
+// server.get("/profile", authenticateToken, (req, res) => {
+//   // Aqui você pode acessar o ID do usuário autenticado usando req.userId
+//   res.json({ userId: req.userId });
+// });
 
 // correr server no url host:port definido em .env
 server.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {

@@ -4,28 +4,41 @@ import { createToken } from "../utils/jwt.js"; // Import the createToken functio
 const login = async (req, res) => {
   const { username, password } = req.body;
 
-  try {
-    const user = await UserModel.findOne({
-      where: {
-        username: username,
-        password: password,
-      },
+  const url = "http://localhost:4242/api/user/login";
+
+  const requestBody = { username, password };
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.setItem("token", data.token);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
-
-    if (!user) {
-      return res.status(401).json({ message: "Usuário não existe" });
-    }
-
-    const token = createToken({
-      id: user.id,
-      username: user.username,
-    });
-
-    return res.json({ token });
-  } catch (error) {
-    console.error("Error during login:", error);
-    return res.status(500).json({ message: "Erro durante o login" });
-  }
 };
 
+// Middleware de autenticação
+const authenticateToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  jwt.verify(token, "your-secret-key", (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: "Invalid token" });
+    }
+
+    req.userId = user.userId;
+    next();
+  });
+};
 export { login };

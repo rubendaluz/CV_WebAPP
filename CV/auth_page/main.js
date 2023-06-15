@@ -19,27 +19,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
-    // Substitua pela URL do endpoint de login
+    // Replace with the URL of the login endpoint
     const url = "http://localhost:4242/api/user/login";
+    const data = { username, password };
 
-    const requestBody = { username, password };
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("token", data.token);
-        console.log(data);
-        window.location.href = "../index/index.html";
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          const token = response.token;
+          console.log("Token:", token);
+          localStorage.setItem("token", token);
+          window.location.href = "../index/index.html";
+        } else {
+          console.error("Error during login. Status code:", xhr.status);
+        }
+      }
+    };
+
+    const dataJSON = JSON.stringify(data);
+    xhr.send(dataJSON);
   });
 
   createAccountForm.addEventListener("submit", (e) => {

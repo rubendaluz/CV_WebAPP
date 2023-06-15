@@ -11,14 +11,15 @@ const getAllProfile = async (req, res) => {
 };
 
 const editInfo = async (req, res) => {
-  const { id } = 1;
-  const { text } = req.body;
+  // const {} = req.params;
+  const { id, text } = req.body;
 
   try {
     const profile = await ProfileModel.findByPk(id);
+    console.log(id);
 
     if (!profile) {
-      return res.status(404).json({ error: "User profile not found" });
+      return res.status(404).json({ error: `User profile not found  ${id}` });
     }
 
     profile.description = text;

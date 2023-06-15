@@ -10,4 +10,4 @@ usersRoutes.post("/login", login);
 // http://localhost:4242/api/user/auth
 usersRoutes.get("/auth", verifyToken);
 
-export { usersRoutes, verifyToken };
+export { usersRoutes };
