@@ -203,11 +203,9 @@ main {
   padding: 10px;
   cursor: pointer;
 }
-
-button {
+.fas {
   display: none;
 }
-
 .edit_remove > i {
   margin: auto 5px;
 }

@@ -28,7 +28,8 @@ let checkToken = () => {
     });
 
     edit_remove.forEach((btn) => {
-      console.log(btn.children);
+      btn.style.display = "block";
+      console.log(btn);
     });
 
     console.log(token);
