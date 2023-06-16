@@ -1,6 +1,7 @@
 import Router from "express";
-import { login } from "../controllers/user.controller.js";
-import { verifyToken } from "../middlewares/auth.js";
+import { login } from "../Controllers/user.controller.js";
+// import {authRequired} from "C:\Users\User\Desktop\Desktop\Curso\Segundo Ano\Segundo Semestre\PW\Trabalho_Prático2\Server\utils\jwt.js"
+
 //--ROUTES--//
 const usersRoutes = Router();
 
@@ -8,6 +9,6 @@ const usersRoutes = Router();
 usersRoutes.post("/login", login);
 
 // http://localhost:4242/api/user/auth
-usersRoutes.get("/auth", verifyToken);
+// usersRoutes.get("/auth", authenticateToken);
 
 export { usersRoutes };

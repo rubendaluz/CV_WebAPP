@@ -45,4 +45,45 @@ const createHab = async (req, res) => {
   }
 };
 
-export { getAllHabs, createHab };
+const deleteHab = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Delete the element from the database using Sequelize
+    await HabModel.destroy({ where: { id } });
+    res.sendStatus(204); // Successfully deleted
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete" });
+  }
+};
+
+const editHab = async (req, res) => {
+  const { id } = req.params;
+  const {
+    newGrade,
+    newInstitute,
+    newType_course,
+    newCourse_name,
+    newEntry_year,
+    newEnd_year,
+  } = req.body;
+
+  try {
+    const updatedHab = await HabModel.update(
+      {
+        grade: newGrade,
+        institute: newInstitute,
+        type_course: newType_course,
+        course_name: newCourse_name,
+        entry_year: newEntry_year,
+        end_year: newEnd_year,
+      },
+      { where: { id } }
+    );
+    res.json(updatedHab);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to edit element" });
+  }
+};
+
+export { getAllHabs, createHab, deleteHab, editHab };

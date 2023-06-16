@@ -33,4 +33,34 @@ const createLang = async (req, res) => {
   }
 };
 
-export { getAllLangs, createLang };
+const deleteLang = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Delete the element from the database using Sequelize
+    await LangsModel.destroy({ where: { id } });
+    res.sendStatus(204); // Successfully deleted
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete Lang" });
+  }
+};
+
+const editLang = async (req, res) => {
+  const { id } = req.params;
+  const { newName, newExp } = req.body;
+
+  try {
+    const updatedLang = await LangsModel.update(
+      {
+        nome: newName,
+        exp: newExp,
+      },
+      { where: { id } }
+    );
+    res.json(updatedLang);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to edit element" });
+  }
+};
+
+export { getAllLangs, createLang, deleteLang, editLang };

@@ -7,9 +7,6 @@ import "dotenv/config";
 import { database } from "./config/context/database.js";
 import { api } from "./routes/index.js";
 
-//
-import { verifyToken } from "./middlewares/auth.js";
-
 import bodyParser from "body-parser";
 
 const server = express();

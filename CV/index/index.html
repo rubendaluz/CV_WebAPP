@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script src="index.js"></script>
     <link
       rel="stylesheet"
@@ -24,7 +25,7 @@
           <li>
             <a href="../auth_page/index.html" id="login_button">Login</a>
           </li>
-          <li><i id="download" class="fas fa-download"></i></li>
+          <li><i id="downloadPagina" class="fas fa-download"></i></li>
           <!-- <li><a id="login_button">Sign in</a></li> -->
         </ul>
       </div>
@@ -43,7 +44,9 @@
         <div class="personal_contacts">
           <div class="top">
             <p class="title">CONTACTOS</p>
-            <i id="add_contact" class="fas fa-plus"></i>
+            <div class="addBtndiv">
+              <i id="add_contact" class="fas fa-plus"></i>
+            </div>
           </div>
           <div class="conteiner_contacts">
             <!-- email -->
@@ -110,8 +113,10 @@
         <div class="skills">
           <div class="programing_langs">
             <div class="top">
-              <p class="title">LINGUAGENS DE PROGRAMAMAÇÃO</p>
-              <i id="addLang" class="fas fa-plus"></i>
+              <p class="title">LINGUAGENS DE PROGRAMAÇÃO</p>
+              <div class="addBtndiv">
+                <i id="addLang" class="fas fa-plus"></i>
+              </div>
             </div>
             <div class="langs_container">
               <!-- Aqui vão as linguagens de programação a serem adicionadas-->
@@ -138,7 +143,9 @@
           <div class="hard_skills">
             <div class="top">
               <p class="title">HARD SKILLS</p>
-              <i id="add_hard_skill" class="fas fa-plus"></i>
+              <div class="addBtndiv">
+                <i id="add_hard_skill" class="fas fa-plus"></i>
+              </div>
             </div>
             <ul class="hard_skills_conteiner">
               <!-- Aqui vão as hard skills -->
@@ -165,7 +172,9 @@
           <div class="socials">
             <div class="top">
               <p class="title">SOCIAL</p>
-              <i id="add_social" class="fas fa-plus"></i>
+              <div class="addBtndiv">
+                <i id="add_social" class="fas fa-plus"></i>
+              </div>
             </div>
             <div class="conteiner_socials"></div>
             <div class="forms form_add_social">
@@ -276,7 +285,9 @@
         <div class="work_experience">
           <div class="top">
             <p class="title">EXPERIÊNCIA PROFISSIONAL</p>
-            <i id="add_work_xp" class="fas fa-plus"></i>
+            <div class="addBtndiv">
+              <i id="add_work_xp" class="fas fa-plus"></i>
+            </div>
           </div>
           <div class="prof_xp_conteiner"></div>
           <div class="forms form_add_work_xp">
@@ -320,7 +331,9 @@
         <div class="education">
           <div class="top">
             <p class="title">EDUCAÇÃO</p>
-            <i id="add_edu" class="fas fa-plus"></i>
+            <div class="addBtndiv">
+              <i id="add_edu" class="fas fa-plus"></i>
+            </div>
           </div>
           <div class="habs_conteiner"></div>
           <div class="forms form_add_hab">

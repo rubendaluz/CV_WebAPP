@@ -18,27 +18,33 @@ let id_hard_skill = 1;
 let id_workXP = 1;
 let id_habs = 1;
 
-// Função para carregar o conteúdo protegido
-let loadProtectedContent = () => {
-  if (isTokenValid()) {
-    // Carregue o conteúdo protegido
-    console.log(isTokenValid());
-    document.querySelector(".edit_remove").style.display = "block";
-    document.querySelector(".fa-plus").style.display = "block";
-  } else {
-    // Redirecione para a página de login
-    //window.location.href = "../auth_page/index.html";
+let checkToken = () => {
+  const token = localStorage.getItem("token"); // Retrieve the token from local storageF
+  const addBtndiv = document.querySelectorAll(".addBtndiv");
+  const edit_remove = document.querySelectorAll(".edit_remove");
+  if (token) {
+    addBtndiv.forEach((button) => {
+      button.style.display = "flex";
+    });
+
+    edit_remove.forEach((btn) => {
+      console.log(btn.children);
+    });
+
+    console.log(token);
   }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  // const url = "http://localhost:4242/api/user/auth";
+
   getAllContacts();
   getAllLangs();
   getAllSkills();
   getAllProfile();
-  loadProtectedContent();
   getAllExperiences();
   getAllHabs();
+  checkToken();
 
   // Variaveis correspondentes a secção de Linguagens de programação
   const btnAddLang = document.querySelector("#addLang");
@@ -64,19 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const max_WorkXPs = 6;
 
   // Funções correspondentes a secção de Linguagens de programação
+  let editLang = (id) => {
+    openLangsForm();
+    let newlang_name = document.querySelector("#lang_name").value;
+    let newlang_xp = document.querySelector("#lang_xp").value;
+    langsForm.addEventListener("submit", (e) => {
+      alterLang(id, newlang_name, newlang_xp);
+      closeLangsForm();
+    });
+  };
+
   insertLang = (nome, exp, id) => {
     langsConteiner.innerHTML += `
-    <div class="lang" id="lang${id}">
+    <div class="lang" lang-id="${id}">
     <p class="lang_name">${nome}</p>
     <div class="skill_bar">
       <div class="lang1_amount" id="lang${id}_amount"></div>
     </div>
-    <div class="edit_remove">
-      <i class="fas fa-edit"></i>
-      <i class="fas fa-trash-alt"></i>
+    <div class="addBtndiv">
+      <button onclick="editLang(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteLang(${id})"><i class="fas fa-trash-alt"></i></buton>
     </div>
     </div>`;
-    console.log(`lang${id}_amount`);
     const bar = document.querySelector(`#lang${id}_amount`);
     bar.style.width = `${exp}%`;
   };
@@ -117,9 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Funções correspondentes a secção de Hard Skills
   insertHardSkill = (nome, id) => {
-    HardSkillsConteiner.innerHTML += `<li id=hard_skill_${id}>
+    HardSkillsConteiner.innerHTML += `<li id=hard_skill_${id} skill-id="${id}">
     ${nome}
-    </li>`;
+    </li>
+    <div class="edit_remove">
+      <button onclick="editSkill(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteSkill(${id})"><i class="fas fa-trash-alt"></i></buton>
+    </div>`;
+
     console.log(`hard_skill_${id}`);
   };
 
@@ -165,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Funções correspondentes a secção
 
   insertWorkXP = (nome, entrance_year, exit_year, job_title, job_desc, id) => {
-    WorkXPConteiner.innerHTML += `<div class="work_xp" id="work_xp_${id}">
+    WorkXPConteiner.innerHTML += `<div class="work_xp" id="work_xp_${id} work-id="${id}">
     <div>
       <h2 class="Company_name">${nome}</h2>
       <p>${entrance_year}-${exit_year}</p>
@@ -175,6 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="job_description">
         ${job_desc}
       </p>
+    </div>
+    <div class="edit_remove">
+    <button onclick="editExperience(${id})"><i class="fas fa-edit"></i></button>
+    <button onclick="deleteExperience(${id})"><i class="fas fa-trash-alt"></i></buton>
     </div>
   </div>`;
   };
@@ -244,40 +268,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Funções correspondentes a secção
 
-  addEmail = (email) => {
+  addEmail = (email, id) => {
     contactsConteiner.innerHTML += `
-    <div class="contact" id="contact_email">
+    <div class="contact" id="contact_email" contact-id="${id}">
     <i class="fas fa-envelope-open"></i>
     <p>${email}</p>
     <div class="edit_remove">
-      <i class="fas fa-edit"></i>
-      <i class="fas fa-trash-alt"></i>
+    <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+    <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
     </div>
   </div>
     `;
   };
 
-  addPhone = (phone) => {
+  addPhone = (phone, id) => {
     contactsConteiner.innerHTML += `
-    <div class="contact" id="contact_phone_number">
+    <div class="contact" id="contact_phone_number" contact-id="${id}">
       <i class="fas fa-phone-alt"></i>
       <p>${phone}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
   };
 
-  addWhatsapp = (whats) => {
+  addWhatsapp = (whats, id) => {
     contactsConteiner.innerHTML += `
-    <div class="contact" id="contact_whatsapp">
+    <div class="contact" id="contact_whatsapp" contact-id="${id}">
       <i class="fab fa-whatsapp"></i>
       <p>${whats}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
@@ -357,19 +381,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switch (checkSelectedContactType()) {
       case "phone_selected":
-        addPhone(phone);
+        addPhone(phone, id_contacts);
         createContact(id_contacts, "personal", "number", phone);
         ++id_contacts;
         break;
 
       case "email_selected":
-        addEmail(email);
+        addEmail(email, id_contacts);
         createContact(id_contacts, "personal", "email", email);
+        console.log(id_contacts);
         ++id_contacts;
         break;
 
       case "whats_selected":
-        addWhatsapp(whats);
+        addWhatsapp(whats, id_contacts);
         createContact(id_contacts, "personal", "whatsapp", whats);
         ++id_contacts;
         break;
@@ -393,66 +418,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Funções correspondentes a secção
 
-  addTelegram = (telegram) => {
+  addTelegram = (telegram, id) => {
     socialConteiner.innerHTML += `
-    <div class="contact" id="social_telegram">
+    <div class="contact" id="social_telegram" contact-id="${id}">
     <i class="fas fa-paper-plane"></i>
     <p>${telegram}</p>
     <div class="edit_remove">
-      <i class="fas fa-edit"></i>
-      <i class="fas fa-trash-alt"></i>
+    <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+    <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
     </div>
   </div>
     `;
   };
 
-  addYoutube = (channel) => {
+  addYoutube = (channel, id) => {
     socialConteiner.innerHTML += `
-    <div class="contact" id="social_youtube">
+    <div class="contact" id="social_youtube" contact-id="${id}">
     <i class="fab fa-youtube"></i>
       <p>${channel}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
   };
 
-  addLinkedin = (link) => {
+  addLinkedin = (link, id) => {
     socialConteiner.innerHTML += `
-    <div class="contact" id="contact_whatsapp">
+    <div class="contact" id="contact_whatsapp" contact-id="${id}">
       <i class="fab fa-linkedin"></i>
       <p>${link}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
   };
 
-  addGithub = (link) => {
+  addGithub = (link, id) => {
     socialConteiner.innerHTML += `
-    <div class="contact" id="contact_whatsapp">
+    <div class="contact" id="contact_whatsapp" contact-id="${id}">
       <i class="fab fa-github"></i>
       <p>${link}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
   };
 
-  addFacebook = (link) => {
+  addFacebook = (link, id) => {
     socialConteiner.innerHTML += `
-    <div class="contact" id="contact_whatsapp">
+    <div class="contact" id="contact_whatsapp" contact-id="${id}">
       <i class="fab fa-facebook-square"></i>
       <p>${link}</p>
       <div class="edit_remove">
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-trash-alt"></i>
+      <button onclick="editContact(${id})"><i class="fas fa-edit"></i></button>
+      <button onclick="deleteContact(${id})"><i class="fas fa-trash-alt"></i></buton>
       </div>
     </div>
     `;
@@ -562,30 +587,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switch (checkSelectedSocialType()) {
       case "telegram_selected":
-        addTelegram(telegram);
+        addTelegram(telegram, id_contacts);
         createContact(id_contacts, "social", "telegram", telegram);
         ++id_contacts;
         break;
 
       case "youtube_selected":
-        addYoutube(youtube);
+        addYoutube(youtube, id_contacts);
         createContact(id_contacts, "social", "youtube", youtube);
         ++id_contacts;
         break;
 
       case "linkedin_selected":
-        addLinkedin(linkedin);
+        addLinkedin(linkedin, id_contacts);
         createContact(id_contacts, "social", "linkedin", linkedin);
         ++id_contacts;
         break;
 
       case "github_selected":
-        addGithub(github);
+        addGithub(github, id_contacts);
         createContact(id_contacts, "social", "github", github);
         ++id_contacts;
         break;
       case "facebook_slected":
-        addFacebook(facebook);
+        addFacebook(facebook, id_contacts);
         createContact(id_contacts, "social", "facebook", facebook);
         ++id_contacts;
         break;
@@ -650,7 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
     type_course,
     id
   ) => {
-    habsConteiner.innerHTML += `<div class="habs" id="hab_${id}">
+    habsConteiner.innerHTML += `<div class="habs" id="hab_${id}" hab-id="${id}">
     <div>
       <h2 class="institute_name">${institute}</h2>
       <p>${grade}</p>
@@ -661,6 +686,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="job_description">
         ${type_course}
       </p>
+    </div>
+    <div class="edit_remove">
+    <button onclick="editHab(${id})"><i class="fas fa-edit"></i></button>
+    <button onclick="deleteHab(${id})"><i class="fas fa-trash-alt"></i></buton>
     </div>
   </div>`;
   };
@@ -694,7 +723,7 @@ document.addEventListener("DOMContentLoaded", () => {
       end_year,
       course_name,
       type_course,
-      1
+      id_habs
     );
     createHab(
       id_habs,
@@ -713,33 +742,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //
 
-  document.querySelector("#download").addEventListener("click", (e) => {
-    e.preventDefault();
-    downloadAsPDF();
+  const btnDownload = document.querySelector("#downloadPagina");
+  btnDownload.addEventListener("click", function () {
+    // Obtém o conteúdo HTML da página atual
+    const element = document.documentElement;
+
+    // Opções de configuração para o html2pdf.js
+    const options = {
+      filename: "cv.pdf",
+      margin: [5, 5, 5, 5], // Margens: superior, direita, inferior, esquerda
+      html2canvas: { scale: 4 },
+      jsPDF: { unit: "mm", format: "a3", orientation: "portrait" },
+    };
+
+    // Gera o PDF com o conteúdo HTML
+    html2pdf().set(options).from(element).save();
   });
 });
-
-// Verifica se o token está presente e válido
-let isTokenValid = () => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  if (!token) {
-    // Token não está presente
-    console.log("Token não está presente");
-    return false;
-  }
-
-  // Verifique o token no servidor (exemplo: usando a biblioteca jsonwebtoken)
-  try {
-    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log("O token é válido");
-    return true;
-  } catch (error) {
-    // O token é inválido ou expirou
-    console.log("O token não é válido");
-    return false;
-  }
-};
 
 let getAllContacts = () => {
   // Fazer uma requisição AJAX para obter as informações dos produtos
@@ -789,6 +808,26 @@ let getAllContacts = () => {
   };
   xhr.send();
 };
+
+function deleteContact(id) {
+  const xhr = new XMLHttpRequest();
+
+  const url = `http://localhost:4242/api/contacts/deleteContact/${id}`;
+
+  xhr.open("DELETE", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento removido com sucesso");
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  // location.reload();
+}
 
 // let createContact = (id, classe, tipo, content) => {
 //   // Fazer uma requisição AJAX para obter as informações dos produtos
@@ -891,6 +930,54 @@ let createLang = (id, nome, exp) => {
   xhr.send(dataJSON);
 };
 
+function deleteLang(id) {
+  const xhr = new XMLHttpRequest();
+
+  const url = `http://localhost:4242/api/langs/deleteLang/${id}`;
+
+  xhr.open("DELETE", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento removido com sucesso");
+      // Remover o elemento da página (opcional)
+      const langElement = document.getElementById(`lang${id}`);
+      langElement.remove();
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  location.reload();
+}
+
+function alterLang(id, newName, newExp) {
+  openLangsForm();
+
+  const xhr = new XMLHttpRequest();
+  const data = { newName, newExp };
+  const url = `http://localhost:4242/api/langs/editLang/${id}`;
+
+  xhr.open("PUT", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento alterado com sucesso");
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  const dataJSON = JSON.stringify(data);
+  console.log(dataJSON);
+
+  xhr.send(dataJSON);
+  location.reload();
+}
+
 let getAllSkills = () => {
   // Fazer uma requisição AJAX para obter as informações dos produtos
   const xhr = new XMLHttpRequest();
@@ -938,6 +1025,26 @@ let createSkill = (id, name) => {
 
   xhr.send(dataJSON);
 };
+
+function deleteSkill(id) {
+  const xhr = new XMLHttpRequest();
+
+  const url = `http://localhost:4242/api/skills/deleteSkill/${id}`;
+
+  xhr.open("DELETE", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento removido com sucesso");
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  location.reload();
+}
 
 let getAllProfile = () => {
   // Fazer uma requisição AJAX para obter as informações dos produtos
@@ -1089,6 +1196,26 @@ let getAllHabs = () => {
   xhr.send();
 };
 
+function deleteExperience(id) {
+  const xhr = new XMLHttpRequest();
+
+  const url = `http://localhost:4242/api/expirences/expereinces/${id}`;
+
+  xhr.open("DELETE", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento removido com sucesso");
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  // location.reload();
+}
+
 let createHab = (
   id,
   grade,
@@ -1131,19 +1258,23 @@ let createHab = (
   xhr.send(dataJSON);
 };
 
-function downloadAsPDF() {
-  //import jsPDF from "jspdf";
-  // Cria um novo objeto jsPDF
-  const pdf = new jsPDF();
+function deleteHab(id) {
+  const xhr = new XMLHttpRequest();
 
-  // Obtém o conteúdo HTML da página atual
-  const htmlContent = document.documentElement;
+  const url = `http://localhost:4242/api/habs/deleteHab/${id}`;
 
-  // Converte o conteúdo HTML para PDF
-  pdf.html(htmlContent, {
-    callback: function () {
-      // Salva o PDF como um arquivo
-      pdf.save("pagina.pdf");
-    },
-  });
+  xhr.open("DELETE", url);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Elemento removido com sucesso");
+      // Remover o elemento da página (opcional)
+    } else {
+      console.error("Erro ao remover o elemento:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  location.reload();
 }

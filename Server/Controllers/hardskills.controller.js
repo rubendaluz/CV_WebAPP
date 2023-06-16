@@ -32,4 +32,33 @@ const createSkill = async (req, res) => {
   }
 };
 
-export { getAllSkills, createSkill };
+const deleteSkill = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Delete the element from the database using Sequelize
+    await HardSkillModel.destroy({ where: { id } });
+    res.sendStatus(204); // Successfully deleted
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete Lang" });
+  }
+};
+
+const editSkill = async (req, res) => {
+  const { id } = req.params;
+  const { newName } = req.body;
+
+  try {
+    const updatedSkill = await HardSkillModel.update(
+      {
+        name: newName,
+      },
+      { where: { id } }
+    );
+    res.json(updatedSkill);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to edit" });
+  }
+};
+
+export { getAllSkills, createSkill, deleteSkill, editSkill };

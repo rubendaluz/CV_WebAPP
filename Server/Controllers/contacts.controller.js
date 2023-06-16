@@ -34,4 +34,33 @@ const createContact = async (req, res) => {
   }
 };
 
-export { getAllContacts, createContact };
+const deleteContact = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Delete the element from the database using Sequelize
+    await ContactsModel.destroy({ where: { id } });
+    res.sendStatus(204); // Successfully deleted
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete Contact" });
+  }
+};
+
+const editContact = async (req, res) => {
+  const { id } = req.params;
+  const { newContent } = req.body;
+
+  try {
+    const updatedContact = await ContactsModel.update(
+      {
+        contacts: newContent,
+      },
+      { where: { id } }
+    );
+    res.json(updatedContact);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to edit element" });
+  }
+};
+
+export { getAllContacts, createContact, deleteContact, editContact };

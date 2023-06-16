@@ -27,11 +27,13 @@ body {
 
 footer {
   height: 10vh;
-  border-top: 1px solid gray;
+  border-top: 3px solid rgb(185, 183, 183);
   margin-top: 30px;
   display: grid;
   align-items: center;
   justify-content: center;
+  width: 90%;
+  margin: 50px auto;
 }
 header {
   display: grid;
@@ -50,7 +52,7 @@ header {
   font-size: 15pt;
 }
 
-.fa-plus {
+.addBtndiv {
   display: none;
 }
 
@@ -70,13 +72,9 @@ header {
   cursor: pointer;
 }
 
-.edit_remove:hover {
-  cursor: pointer;
-}
-
 .header {
   display: grid;
-  grid-template-columns: 0.5fr 3fr;
+  grid-template-columns: 1fr 3fr;
   height: 30vh;
   width: 95%;
   margin: auto;
@@ -181,7 +179,7 @@ main {
 
 .lang {
   display: grid;
-  grid-template-columns: 10% 70% 20%;
+  grid-template-columns: 10% 60% 20%;
   justify-content: center;
   align-items: center;
 }
@@ -200,10 +198,14 @@ main {
 }
 
 .edit_remove {
-  /* display: "flex"; */
-  /* flex-direction: row; */
+  flex-direction: row;
   margin: 10px;
   padding: 10px;
+  cursor: pointer;
+}
+
+button {
+  display: none;
 }
 
 .edit_remove > i {
